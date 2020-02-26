@@ -27,7 +27,7 @@
       <h1>One simple webpage to convert Protocol Buffers to TypeScript definition files.</h1>
       <h2>Dentists hate him!</h2>
       <div class="col">
-        Protocol buffer:
+        Protocol buffer: <input type="checkbox" name="camelCase" id="camelCase" onchange="onProtobuf()" checked/> camelCase
         <br>
 <textarea name="" id="protobuf" rows="40" oninput="onProtobuf()">
 message Person {
@@ -129,8 +129,17 @@ message AddressBook {
             isRepeated = true;
             tokens.shift();
         }
+        let key = tokens[1];
+        if(document.querySelector('#camelCase').checked) {
+          key = key.split('_').map((v,i) => {
+            if(i === 0) {
+              return v
+            }
+            return v[0].toUpperCase()+v.slice(1)
+          }).join('')
+        }
 
-        return `${indentChar.repeat(indent)}${tokens[1]}?: ${protoToTsType(tokens[0])}${ isRepeated ? "[]" : ""}`;
+        return `${indentChar.repeat(indent)}${key}?: ${protoToTsType(tokens[0])}${ isRepeated ? "[]" : ""}`;
       }
 
       parseProtobuf(protobufVal());
