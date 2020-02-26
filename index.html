@@ -124,7 +124,7 @@ message AddressBook {
           case "}":
             return "}";
           case "message":
-            return "interface " + tokens[1] + " {";
+            return "export interface " + tokens[1] + " {";
           case "repeated":
             isRepeated = true;
             tokens.shift();
