@@ -130,7 +130,7 @@ message AddressBook {
             tokens.shift();
         }
 
-        return `${indentChar.repeat(indent)}${tokens[1]}: ${protoToTsType(tokens[0])}${ isRepeated ? "[]" : ""}`;
+        return `${indentChar.repeat(indent)}${tokens[1]}?: ${protoToTsType(tokens[0])}${ isRepeated ? "[]" : ""}`;
       }
 
       parseProtobuf(protobufVal());
